@@ -22,4 +22,4 @@ Weektask class is a model of a weekly programming assignment that is to be submi
 Multiple submissions correspond to a single task.
 
 #### Submission
-Submission instance is a solution to a particular weekly task submitted by a student. A submission should be executable py-file and it is graded by the judge system. Each submission is associated with a particular student, a particular task and and a grade. Each submission should be checked against submission deadline and file extension.
+Submission instance is a solution to a particular weekly task submitted by a student. A submission should be an executable py-file and it is graded by the judge system. Each submission is associated with a particular student, a particular task and and a grade. Each submission should be checked against the submission deadline and file extension.
