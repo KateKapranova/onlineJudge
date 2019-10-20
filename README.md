@@ -1,6 +1,6 @@
 # onlineJudge
 
-Online Judge is a online submission system for grading of Algorithms submissions at the Institute of Informatik (Universität Potsdam).
+Online Judge is an online submission system for grading of Algorithms submissions at the Institute of Informatik (Universität Potsdam).
 
 ## Architecture
 
