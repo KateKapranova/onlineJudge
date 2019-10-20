@@ -7,10 +7,6 @@ Online Judge is an online submission system for grading of Algorithms submission
 The online judge system will be deployed on servers of the Institute of Informatik and will include an online web client with two modi: student and admin. The system architecture will adopt a model-view-controller approach. Frontend is realised with HTML, CSS, JS, Bootstrap. 
 Backend is realised with JS.
 
-### System Requirements
-
-Linux/Windows 10.
-
 ### Implemented classes
 
 #### Student
