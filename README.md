@@ -9,7 +9,7 @@ Backend is realised with JS.
 
 ### System Requirements
 
-Tested on Linux and Windows 10.
+Linux and Windows 10.
 
 ### Implemented classes
 
