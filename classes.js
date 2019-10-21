@@ -64,7 +64,7 @@ class Weektask{
   }
   //function to calculate an average grade for this task across all submissions
   getWeektaskAverage(){
-    this.weektaskAverage = calculateTotal(this)/this.submissions.length
+    this.weektaskAverage = Number((calculateTotal(this)/this.submissions.length).toFixed(2))
     return this.weektaskAverage
   }
 }
@@ -78,7 +78,7 @@ class Submission{
     this.weektask = weektask;
     this.task = weektask.taskName
     this.file = fileName;
-    this.comment = "";
+    this.comment = "Not submitted";
     this.deadline = weektask.deadline;
     student.submissions.push(this)
     weektask.submissions.push(this)
@@ -106,6 +106,7 @@ class Submission{
     this.grade = getRandomInt(6);
     this.student.calculateStudentAverage()
     this.weektask.getWeektaskAverage()
+    this.comment = "Submitted and graded"
 
   }
 }
