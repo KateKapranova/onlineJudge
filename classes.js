@@ -29,24 +29,11 @@ class Student{
     this.average = 0
     this.totalPoints = 0
   }
-  //function to access a student average grade for all submissions
-  studentAverage(){
-    var averageGrade=0;
-    for (let i=0;i<this.submissions.length;i++){
-      averageGrade+=this.submissions[i].grade
-    }
-    averageGrade=averageGrade/this.submissions.length;
-    this.average = Number(averageGrade.toFixed(2))
-    return averageGrade;
-  }
-  //function to access a student total grade for all submissions
-  studentTotal(){
-    var totalPoints=0;
-    for (let i=0;i<this.submissions.length;i++){
-      totalPoints+=this.submissions[i].grade
-    }
-    this.totalPoints = totalPoints
-    return totalPoints;
+  //function to calculate a student average grade and total points for all submissions
+  calculateStudentAverage(){
+    this.totalPoints = calculateTotal(this)
+    this.average = Number((this.totalPoints/this.submissions.length).toFixed(2))
+
   }
 
   //function to print out submission grades
@@ -58,20 +45,27 @@ class Student{
 printGrades = (submissions) => console.log(submissions.task + ": " + submissions.grade)
 
 
+//help function to get a total number of points of a student instance / a weektask instance
+//used in Student class for both total and average
+//used in Weektask class only for average as of now
+function calculateTotal(obj){
+  return obj.submissions.reduce((acc,rec) => acc+rec.grade, 0)
+}
+
+/*Attention: both Student and Weektask classes have attributes named SUBMISSIONS
+It is done to increase reusability of code */
+
 class Weektask{
   constructor(taskName,deadline){
     this.taskName = taskName
     this.deadline = deadline
-    this.taskSubmissions=[]
+    this.submissions=[]
+    this.weektaskAverage=0
   }
   //function to calculate an average grade for this task across all submissions
-  averageGrade(){
-    var averageGrade=0;
-    for (let i=0;i<this.taskSubmissions.length;i++){
-      averageGrade+=this.taskSubmissions[i].grade
-    }
-    averageGrade=averageGrade/this.taskSubmissions.length;
-    return averageGrade;
+  getWeektaskAverage(){
+    this.weektaskAverage = calculateTotal(this)/this.submissions.length
+    return this.weektaskAverage
   }
 }
 
@@ -81,34 +75,38 @@ class Submission{
     this.student = student;
     this.grade = undefined;
     this.submissionTime = new Date().toLocaleDateString('en-GB');
-    this.task = weektask.taskName;
+    this.weektask = weektask;
+    this.task = weektask.taskName
     this.file = fileName;
     this.comment = "";
     this.deadline = weektask.deadline;
     student.submissions.push(this)
-    weektask.taskSubmissions.push(this)
+    weektask.submissions.push(this)
   }
   //grade a submission by assigning a random int value
   //but first the function checks the formal requirements:
-  //(1) file extension and (2) submission time
+  //(1) file extension and (2) submission time doesn't exceed deadline
   gradeSubmission(){
     //only python files are allowed
     if (this.file.slice(-2) !== 'py'){
       this.grade = 0;
-      this.student.studentAverage()
+      this.student.calculateStudentAverage()
       this.comment = "Only py files are allowed!"
       return
     }
+    //submission is before the deadline
     if (this.submissionTime > this.deadline){
       this.grade = 0;
-      this.student.studentAverage()
+      this.student.calculateStudentAverage()
       this.comment = "Submission after deadline!"
       return
     }
     //if formal requirements are met, the submission is evaluated by the judge
+    //instance of Student and Weektask are updated
     this.grade = getRandomInt(6);
-    this.student.studentAverage()
-    this.student.studentTotal()
+    this.student.calculateStudentAverage()
+    this.weektask.getWeektaskAverage()
+
   }
 }
 
@@ -143,7 +141,7 @@ console.log(kaoriSubmission)
 console.log('\n')
 
 console.log("AVERAGE GRADE FOR TASK 1")
-console.log(Number((task1.averageGrade()).toFixed(1)))
+console.log(Number((task1.getWeektaskAverage()).toFixed(1)))
 console.log('\n')
 
 console.log("STUDENT KAORI SUBMITS TASK 2")
