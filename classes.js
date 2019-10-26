@@ -15,6 +15,9 @@
 //Each submission is associated with a particular student, a particular task and
 // and a grade. Each submission should be checked against submission deadline and file extension.
 
+//Attempt to eliminate circular dependecies between student and submission classes
+
+
 //function generating a random integer
 //a mockup judge system
 function getRandomInt(max) {
@@ -86,25 +89,25 @@ class Submission{
   //grade a submission by assigning a random int value
   //but first the function checks the formal requirements:
   //(1) file extension and (2) submission time doesn't exceed deadline
-  gradeSubmission(){
+  gradeSubmission(student){
     //only python files are allowed
     if (this.file.slice(-2) !== 'py'){
       this.grade = 0;
-      this.student.calculateStudentAverage()
+      student.calculateStudentAverage()
       this.comment = "Only py files are allowed!"
       return
     }
     //submission is before the deadline
     if (this.submissionTime > this.deadline){
       this.grade = 0;
-      this.student.calculateStudentAverage()
+      student.calculateStudentAverage()
       this.comment = "Submission after deadline!"
       return
     }
     //if formal requirements are met, the submission is evaluated by the judge
     //instance of Student and Weektask are updated
     this.grade = getRandomInt(6);
-    this.student.calculateStudentAverage()
+    student.calculateStudentAverage()
     this.weektask.getWeektaskAverage()
     this.comment = "Submitted and graded"
 
@@ -130,11 +133,11 @@ console.log('\n')
 
 console.log("STUDENTS SUBMIT TASK 1")
 kamilSubmission = new Submission(kamil, task1,"recur.py")
-kamilSubmission.gradeSubmission()
+kamilSubmission.gradeSubmission(kamil)
 kateSubmission = new Submission(kate, task1,"recursion.pdf")
-kateSubmission.gradeSubmission()
+kateSubmission.gradeSubmission(kate)
 kaoriSubmission = new Submission(kaori, task1,"recursion.py")
-kaoriSubmission.gradeSubmission()
+kaoriSubmission.gradeSubmission(kaori)
 
 console.log(kamilSubmission)
 console.log(kateSubmission)
@@ -147,13 +150,13 @@ console.log('\n')
 
 console.log("STUDENT KAORI SUBMITS TASK 2")
 kaoriSubmission1 = new Submission(kaori, task2,"divide.py")
-kaoriSubmission1.gradeSubmission()
+kaoriSubmission1.gradeSubmission(kaori)
 console.log(kaori.submissions[1])
 console.log('\n')
 
 console.log("STUDENT KAORI SUBMITS TASK 3")
 kaoriSubmission2 = new Submission(kaori, task3,"dynamic.py")
-kaoriSubmission2.gradeSubmission()
+kaoriSubmission2.gradeSubmission(kaori)
 console.log(kaori.submissions[2])
 console.log('\n')
 
