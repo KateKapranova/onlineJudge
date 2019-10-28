@@ -1,7 +1,11 @@
 const Help = require('./helpFunctions.js');
 
+let idCounter = 1;
+
 module.exports = class Weektask{
   constructor(taskName,deadline){
+    this.id = idCounter 
+    idCounter++
     this.taskName = taskName
     this.deadline = deadline
     this.submissions=[]
