@@ -1,32 +1,21 @@
-const Help = require('./helpFunctions.js');
+const Submission = require('./submission.js')
+const Generator = require('generate-password')
 
-let idCounter = 1;
-
-module.exports=class Student{
-  constructor(name, email){
-    this.id = idCounter
-    idCounter++
-    this.name = name
-    this.email = email
-    this.submissions = []
-    this.average = 0
-    this.totalPoints = 0
-  }
-  //function to calculate a student average grade and total points for all submissions
-  calculateStudentAverage(submissionId){
-    this.totalPoints = Help.calculateTotal(this.id,submissionId)
-    if (this.totalPoints === 0){
-      this.average = 0
-      return
+module.exports = class Student{
+    constructor(name, email,id=Math.floor(Math.random() * 10000), submissions=[],average=0,totalPoints=0){
+        this.id = id
+        this.name = name
+        this.email = email
+        this.submissions = submissions
+        this.average = average
+        this.totalPoints = totalPoints
+        this.password = Generator.generate({length: 10,uppercase: true,numbers:true})
     }
-    this.average = Number((this.totalPoints/this.submissions.length).toFixed(2))
-
-  }
-
-  //function to print out submission grades
-  printSubmissionGrades(){
-    this.submissions.forEach(printGrades)
-  }
+    makeSubmission(file,task){
+        const newSubmission = new Submission(file,task,this.id)
+        this.submissions.push(newSubmission)
+        task.submissions.push(newSubmission)
+        this.totalPoints = this.totalPoints + newSubmission.grade
+        this.average = Number((this.totalPoints/this.submissions.length).toFixed(2))
+    }
 }
-
-printGrades = (submissions) => console.log(submissions.task + ": " + submissions.grade)

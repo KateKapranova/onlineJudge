@@ -13,7 +13,7 @@ const save = function(filename, data){
         return fs.writeFileSync(filename, writingUtility(data))
     }
     var alreadyExistingData = JSON.parse(fs.readFileSync(filename, 'utf8'))
-    if (alreadyExistingData.table.filter(item => item.id === data.id).length != 0){
+    if (alreadyExistingData.table.filter(item => item.name === data.name).length != 0){
         //if there are entries with the same id, don't write it again to DB
         return
     }
