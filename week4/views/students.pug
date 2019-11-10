@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    h1 The number of students is #{students.length}
+    each person in students
+      p #{person.id} #{person.name} #{person.email} #{person.submissions.length}

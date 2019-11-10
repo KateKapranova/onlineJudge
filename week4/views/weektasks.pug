@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    h1 The number of weektasks is #{weektasks.length}
+    each task in weektasks
+      p #{task.id} #{task.name} #{task.deadline}
