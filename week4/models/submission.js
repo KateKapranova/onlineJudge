@@ -23,7 +23,7 @@ module.exports = class Submission{
 
         //if formal requirements are met, the submission is evaluated by the judge
         this.comment = "Submitted and graded"
-        return getRandomInt(this.maxPoints);
+        return getRandomInt(this.maxPoints)
 
     }
    

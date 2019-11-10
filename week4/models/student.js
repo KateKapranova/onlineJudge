@@ -9,7 +9,7 @@ module.exports = class Student{
         this.submissions = submissions
         this.average = average
         this.totalPoints = totalPoints
-        this.password = Generator.generate({length: 10,uppercase: true,numbers:true})
+        // this.password = Generator.generate({length: 10,uppercase: true,numbers:true})
     }
     makeSubmission(file,task){
         const newSubmission = new Submission(file,task,this.id)

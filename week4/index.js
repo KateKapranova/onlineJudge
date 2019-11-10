@@ -61,14 +61,22 @@ app.get('/submit/:studentId/:weektaskId', async(req,res) =>{
     res.render('submit')
 })
 
-//student can submit her homework
-// app.post('/submit/:studentId/:weektaskId', async (req,res) => {
-//     const file = req.body.file
-//     const student = await StudentService.find(req.params.studentId)
-//     const weektask = await WeektaskService.find(req.body.id)
-//     student.makeSubmission(file, weektask)
-//     res.send('task submitted')
-// })
+// student can submit her homework
+app.post('/submit/:studentId/:weektaskId', async (req,res) => {
+    const allStudents = await StudentService.findAll()
+    const allWeektasks = await WeektaskService.findAll()
+
+    const submittingStudent = allStudents.find(p => p.id == req.params.studentId)
+    const submittedWeektask = allWeektasks.find(p => p.id == req.params.weektaskId)
+
+    const file = req.body.file
+    
+    submittingStudent.makeSubmission(file, submittedWeektask)
+    res.send('task submitted')
+
+    await StudentService.saveAll(allStudents)
+    await WeektaskService.saveAll(allWeektasks)
+})
 
 app.listen(3000, ()=>{
     console.log("Server is listening")
