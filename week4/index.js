@@ -11,7 +11,6 @@ app.set('view engine','pug')
 app.use(BodyParser.json())
 
 app.get('/', (req,res) => {
-    res.sendFile(`${__dirname}/index.html`)
     res.render('index')
 })
 
@@ -57,25 +56,23 @@ app.delete('/weektask/:id', async (req,res) => {
     res.send('ok')
 })
 
-app.get('/submit/:studentId/:weektaskId', async(req,res) =>{
-    res.render('submit')
-})
-
 // student can submit her homework
-app.post('/submit/:studentId/:weektaskId', async (req,res) => {
+app.post('/student/:studentId/weektask-submissions', async (req,res) => {
     const allStudents = await StudentService.findAll()
     const allWeektasks = await WeektaskService.findAll()
 
     const submittingStudent = allStudents.find(p => p.id == req.params.studentId)
-    const submittedWeektask = allWeektasks.find(p => p.id == req.params.weektaskId)
+    //now id of weektask comes from the body of post request
+    const submittedWeektask = allWeektasks.find(p => p.id == req.body.id)
 
     const file = req.body.file
     
     submittingStudent.makeSubmission(file, submittedWeektask)
-    res.send('task submitted')
-
+    
     await StudentService.saveAll(allStudents)
     await WeektaskService.saveAll(allWeektasks)
+
+    res.send('task submitted')
 })
 
 app.listen(3000, ()=>{
