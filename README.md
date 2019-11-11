@@ -4,11 +4,11 @@ Online Judge is a submission system for automatic grading of programming assignm
 
 ## Architecture
 
-The online judge system will be deployed on servers of the Institute of Informatik and will include an online web client with two modi: student and admin. The system architecture will adopt a model-view-controller approach. Frontend is realised with HTML, CSS, JS, Bootstrap. 
-Backend is realised with Node.js
+The online judge system will be deployed on servers of the Institute of Informatik and will include an online web client with two modi: student and admin. The system architecture will adopt a model-view-server approach. Frontend is realised with HTML, CSS, JS, Bootstrap. 
+Backend is realised with Node.js, Express.js and MongoDB.
 
 ### Package layout
-The project has been modularised. As of now, it is realised with the domain-driven design in mind and separated into models and services. The created objects are written into .json files. As of now, database is realised as a collection of .json files.
+The project has been modularised. As of now, it is realised with the domain-driven design in mind and separated into models, views and services. The created objects are written into .json files. As of now, database is realised as a collection of .json files. Introduction of MongoDB is pending.
 
 ### Implemented classes
 
