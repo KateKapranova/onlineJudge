@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 The number of weektasks is #{items.length}
+    each item in items
+      p Name: #{item.name}
+      p Release date: #{moment(item.releaseDate).format('MMMM Do YYYY, h:mm a')}
+      p Deadline: #{moment(item.deadline).format('MMMM Do YYYY, h:mm a')}
+      p Left until deadline: #{moment(item.deadline).toNow(true)}
+      p Maximum points: #{item.maxPoints}
+      p id: #{item.id}
+      p -
+    
