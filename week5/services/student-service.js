@@ -21,9 +21,15 @@ class StudentService extends BaseService {
         newSubmission.startJudgeRoutine(submittedFile) 
         await SubmissionService.add(newSubmission) 
 
-        student.totalPoints = student.totalPoints + newSubmission.grade
-        student.average = Number((student.totalPoints/student.submissions.length).toFixed(2))
-                 
+        if (student.submissions.length == 0){
+            student.totalPoints = newSubmission.grade
+            student.average = newSubmission.grade
+        }
+        else if (student.submissions.length > 0){
+            student.totalPoints = student.totalPoints + newSubmission.grade
+            student.average = Number((student.totalPoints/student.submissions.length).toFixed(2))
+        }
+                         
         student.submissions.push(newSubmission)
         task.submissions.push(newSubmission)
 

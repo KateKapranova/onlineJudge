@@ -18,7 +18,7 @@ localhost:3000/weektask/:weektaskId
 ## Post Requests
 One can post a new student with the following axios request:
 ```
-axios.post('/student', {name: "Kamil", email: kamil@uni-potsdam.de", average: 0, totalPoints: 0, password: "qwerty"}).then(console.log)
+axios.post('/student', {name: "Kamil", email: kamil@uni-potsdam.de", password: "qwerty"}).then(console.log)
 
 ```
 It's important to note that each student must have a different email address.
