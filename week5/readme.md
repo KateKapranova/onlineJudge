@@ -30,7 +30,7 @@ axios.post('/weektask', {name: "Divide and Conquer", deadline: '2019-11-30T00:00
 ```
 In this case release date means a date when a task becomes available for submission. Generally students have a week to submit a task.
 
-A registered student can submit a solution to a weektask as follows, where URL specifies
+A registered student can submit a solution to a weektask as follows:
 ```
 axios.post('/student/:studentId/submit/:weektaskId', {file: "task01.py"} ).then(console.log)
 ```
