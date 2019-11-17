@@ -1,6 +1,8 @@
 const Generator = require('generate-password')
 const Validator = require('validator')
 const mongoose = require('mongoose')
+const SubmissionModel = require('./submission')
+
 
 const StudentSchema = new mongoose.Schema({
     name: {
@@ -19,8 +21,15 @@ const StudentSchema = new mongoose.Schema({
     password: String
 })
 
-StudentSchema.methods.makeSubmission = function(file,task){
-    const newSubmission = new Submission(file,task,this.id)
+StudentSchema.methods.makeSubmission = function(submittedFile,task){
+    let newSubmission = new SubmissionModel({
+        file: submittedFile,
+        taskId: task.id,
+        studentId: this.id,
+        submissionTime: new Date().toLocaleDateString('en-GB'),
+        maxPoints: task.maxPoints
+    })
+           
     this.submissions.push(newSubmission)
     task.submissions.push(newSubmission)
     this.totalPoints = this.totalPoints + newSubmission.grade
