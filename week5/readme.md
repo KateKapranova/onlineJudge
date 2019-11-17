@@ -1,6 +1,6 @@
-#Axios requests for onlineJudge
+# Axios requests for onlineJudge
 
-##Get Requests
+## Get Requests
 
 One can show all the students and all the weektasks registered in the system with:
 
@@ -15,7 +15,7 @@ localhost:3000/student/:studentId
 localhost:3000/weektask/:weektaskId
 ```
 
-##Post Requests
+## Post Requests
 One can post a new student with the following axios request:
 ```
 axios.post('/student', {name: "Kamil", email: kamil@uni-potsdam.de", average: 0, totalPoints: 0, password: "qwerty"}).then(console.log)
@@ -33,4 +33,13 @@ In this case release date means a date when a task becomes available for submiss
 A registered student can submit a solution to a weektask as follows, where URL specifies
 ```
 axios.post('/student/:studentId/submit/:weektaskId', {file: "task01.py"} ).then(console.log)
+```
+
+## Delete Requests
+
+One can delete a student or a weektask with a delete request:
+
+```
+axios.delete('/student/:studentId').then(console.log)
+axios.delete('/weektask/:weektaskId').then(console.log)
 ```
