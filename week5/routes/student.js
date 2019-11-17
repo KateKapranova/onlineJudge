@@ -3,7 +3,6 @@ const router = express.Router()
 
 const StudentService = require('../services/student-service')
 const WeektaskService = require('../services/weektask-service')
-const SubmissionService = require('../services/submission-service')
 
 
 router.get('/all', async (req, res) =>{
@@ -27,13 +26,15 @@ router.delete('/:id', async (req,res) => {
 })
 
 // student can submit her homework
-router.post('/:studentId/weektask-submissions', async (req,res) => {
+router.post('/:studentId/submit/:weektaskId', async (req,res) => {
     const student = await StudentService.find(req.params.studentId)
-    const task = await WeektaskService.find(req.body.taskId)
+    //console.log(student.name)
+    const task = await WeektaskService.find(req.params.weektaskId)
+    //console.log(task.name)
     file = req.body.file
     //const newSubmission=await SubmissionService.add({file:file, taskId: taskId,})
-    student.makeSubmission(file, task)
-    res.send(student)
+    await StudentService.makeSubmission(student, file, task)
+    res.send("submitted")
 })
 
 module.exports = router

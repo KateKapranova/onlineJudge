@@ -6,10 +6,30 @@ const SubmissionSchema = new mongoose.Schema({
     studentId: String,
     submissionTime:Date,
     maxPoints: Number,
-    grade:{
-        default: 0
-    }
+    grade: 0,
+    comment:""
 })
+
+SubmissionSchema.methods.startJudgeRoutine = function(file){
+    //only python files are allowed
+    if (file.slice(-2) !== 'py'){
+        this.comment = "Only py files are allowed!"
+        this.grade = 0
+    }
+    //check if submission is before the deadline
+    if (this.submissionTime > this.deadline){
+        this.comment = "Submission after deadline!"
+        this.grade = 0
+    }
+
+    //if formal requirements are met, the submission is evaluated by the judge
+    this.comment = "Submitted and graded"
+    this.grade=getRandomInt(this.maxPoints)
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max))
+}
 
 const SubmissionModel = mongoose.model("Submission", SubmissionSchema)
 
@@ -46,6 +66,3 @@ module.exports = SubmissionModel
    
 // }
 
-// function getRandomInt(max) {
-//     return Math.floor(Math.random() * Math.floor(max))
-// }

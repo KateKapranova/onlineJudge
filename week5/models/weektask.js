@@ -4,8 +4,15 @@ const WeektaskSchema = new mongoose.Schema({
     name: String,
     deadline: Date,
     releaseDate: Date,
-    maxPoints: Number
+    maxPoints: Number,
+    submissions:[{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Submission',
+        autopopulate: true
+    }]
 })
+
+WeektaskSchema.plugin(require('mongoose-autopopulate'))
 
 const WeektaskModel = mongoose.model("Weektask", WeektaskSchema)
 

@@ -11,7 +11,7 @@ router.get('/all', async (req, res) =>{
 router.get('/:id', async (req, res) =>{
     const id = req.params.id
     const weektask = await WeektaskService.find(id)
-    res.render('weektask', {data: weektask})
+    res.render('data', {data: weektask})
 })
 
 router.post('/', async (req,res) => {

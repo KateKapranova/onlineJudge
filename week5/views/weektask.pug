@@ -3,11 +3,23 @@ extends layout
 block content
     h1 The number of weektasks is #{items.length}
     each item in items
+      h4 id: #{item.id} 
       p Name: #{item.name}
       p Release date: #{moment(item.releaseDate).format('MMMM Do YYYY, h:mm a')}
       p Deadline: #{moment(item.deadline).format('MMMM Do YYYY, h:mm a')}
       p Left until deadline: #{moment(item.deadline).toNow(true)}
       p Maximum points: #{item.maxPoints}
-      p id: #{item.id}
+      p Number of received submissions: #{item.submissions.length} 
+      each submission in item.submissions
+        ul
+        li id: #{submission.id}
+        li file: #{submission.file}
+        li taskId: #{submission.taskId}
+        li studentId: #{submission.studentId}
+        li submissionTime: #{submission.submissionTime}
+        li maxPoints: #{submission.maxpoints}
+        li grade: #{submission.grade}
+        li comment: #{submission.comment}
+           
       p -
     
