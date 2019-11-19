@@ -8,7 +8,7 @@ The online judge system will be deployed on servers of the Institute of Informat
 Backend is realised with Node.js, Express.js and MongoDB.
 
 ### Package layout
-The project has been modularised. As of now, it is realised with the domain-driven design in mind and separated into models, views and services. The created objects are written into .json files. As of now, database is realised as a collection of .json files. Introduction of MongoDB is pending.
+The project has been modularised. As of now, it is realised with the domain-driven design in mind and separated into models, views and services. The created objects are written into .json files. As of now, database is realised as a collection of .json files. The attached database is MongoDB.
 
 ### Implemented classes
 
