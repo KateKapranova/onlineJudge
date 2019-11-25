@@ -39,8 +39,7 @@ router.delete('/:id', async (req,res) => {
 })
 
 router.delete('/all/delete', async (req,res) => {
-    const weektasks = await WeektaskService.findAll()
-    await weektasks.map(item => WeektaskService.del(item.id))
+    await WeektaskService.delAll()
     res.send('deleted')
 })
 

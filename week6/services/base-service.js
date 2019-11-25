@@ -8,8 +8,16 @@ module.exports = class Service {
     return this.model.create(item)
   }
 
-  async  del(itemId) {
-    return this.model.deleteOne({ _id: itemId })
+  async del(itemId) {
+    return this.model.deleteMany({ _id: itemId })
+  }
+
+  async delAll(){
+    return this.model.deleteMany({})
+  }
+
+  async delByName(itemName){
+    return this.model.deleteMany( { name : itemName } )
   }
 
   async find(itemId) {

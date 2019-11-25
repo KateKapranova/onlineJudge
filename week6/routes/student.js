@@ -37,6 +37,16 @@ router.delete('/:id', async (req,res) => {
     res.send('ok')
 })
 
+//DOESN'T WORK AS OF NOW, CAST error
+//delete by name, add an object {name: "Max Mustermann"} in the body
+router.delete('/delete', async (req,res) => {
+    console.log(req.body)
+    const name = req.body.name
+    await StudentService.delByName(name)
+    res.send('deleted')
+})
+
+
 // student can submit her homework
 router.post('/:studentId/submit/:weektaskId', async (req,res) => {
     const student = await StudentService.find(req.params.studentId)
