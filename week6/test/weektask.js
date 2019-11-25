@@ -133,37 +133,37 @@ test('Get a list of weektasks', async t => {
 
 
 
-test('Delete all weektasks from DB', async t => {
-    t.plan(5)
+// test('Delete all weektasks from DB', async t => {
+//     t.plan(5)
   
-    // first create a weektask
-    const weektaskToCreate = {
-        name: 'Algorithms 7.0',
-        deadline: '2019-12-05T23:00:00.000Z',
-        releaseDate: '2019-11-25T23:00:00.000Z',
-        maxPoints: 6,
-    }
+//     // first create a weektask
+//     const weektaskToCreate = {
+//         name: 'Algorithms 7.0',
+//         deadline: '2019-12-05T23:00:00.000Z',
+//         releaseDate: '2019-11-25T23:00:00.000Z',
+//         maxPoints: 6,
+//     }
 
-    const WeektaskCreated = (await request(app)
-      .post('/weektask')
-      .send(weektaskToCreate)).body
+//     const WeektaskCreated = (await request(app)
+//       .post('/weektask')
+//       .send(weektaskToCreate)).body
   
-    // delete all weektasks
-    const deleteRes = await request(app).delete('/weektask/all/delete')
-    // checking for server response status success
-    t.is(deleteRes.status, 200)
-    t.is(deleteRes.ok, true)
+//     // delete all weektasks
+//     const deleteRes = await request(app).delete('/weektask/all/delete')
+//     // checking for server response status success
+//     t.is(deleteRes.status, 200)
+//     t.is(deleteRes.ok, true)
   
-    // trying to render the detail page for the deleted weektask
-    const fetch = await request(app).get(`/weektask/${WeektaskCreated._id}`)
-    // checking for server response status - page not found 404
-    t.is(fetch.status, 404)
+//     // trying to render the detail page for the deleted weektask
+//     const fetch = await request(app).get(`/weektask/${WeektaskCreated._id}`)
+//     // checking for server response status - page not found 404
+//     t.is(fetch.status, 404)
   
-    // trying to fetch the JSON data of the deleted weektask
-    const fetchJson = await request(app).get(`/weektask/${WeektaskCreated._id}/json`)
-    // checking for server response status - page not found 404
-    t.is(fetchJson.status, 404)
+//     // trying to fetch the JSON data of the deleted weektask
+//     const fetchJson = await request(app).get(`/weektask/${WeektaskCreated._id}/json`)
+//     // checking for server response status - page not found 404
+//     t.is(fetchJson.status, 404)
 
-    const fetchWeektasks = await request(app).get('/weektask/all/json')
-    t.deepEqual(fetchWeektasks.body,[])
-  })
+//     const fetchWeektasks = await request(app).get('/weektask/all/json')
+//     t.deepEqual(fetchWeektasks.body,[])
+//   })

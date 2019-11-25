@@ -136,6 +136,7 @@ test('Get a list of students', async t => {
 
 
 test('Student can make a submission', async t => {
+    t.plan(3)
     const barbaraStudent = {
         name: 'Barbara Mustermann',
         email: randomstring.generate(8)+'@uni-potsdam.de',
@@ -169,23 +170,11 @@ test('Student can make a submission', async t => {
     // check the server response success
     t.is(makeSubmissionRes.status, 200)
   
-    // response body is the altered data of the user
-    // const MadeSubmission = makeSubmissionRes.body
-    
-    console.log(createdStudent)
-    console.log(createdWeektask)
-
+    // check that the student id matches the studentId in the submission
+    t.is(createdStudent._id, makeSubmissionRes.body.submissions[0].studentId)
+    // check that the weektask id matches the taskId in the submission
+    t.is(createdWeektask._id, makeSubmissionRes.body.submissions[0].taskId)
+      
     await request(app).delete(`/student/${createdStudent._id}`)
     await request(app).delete(`/weektask/${createdWeektask._id}`)
-
-    // check that user has that meetup on their meetups
-    // t.is(studentAltered.submissions[0]._id, createdMeetup._id)
-  
-    // // check that user's meetup is the meetup we created
-    // t.deepEqual(personAltered.meetups[0], createdMeetup)
-  
-    // // personAltered is not the same with the first created user
-    // // createdPerson had no meetups
-    // // personAltered has the meetup amongst their list of meetups
-    // t.notDeepEqual(personAltered, createdPerson)
   })

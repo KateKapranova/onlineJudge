@@ -46,7 +46,7 @@ router.post('/:studentId/submit/:weektaskId', async (req,res) => {
     file = req.body.file
     //const newSubmission=await SubmissionService.add({file:file, taskId: taskId,})
     await StudentService.makeSubmission(student, file, task)
-    res.send("submitted")
+    res.send(student)
 })
 
 module.exports = router
