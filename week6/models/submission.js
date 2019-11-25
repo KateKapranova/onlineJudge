@@ -15,11 +15,13 @@ SubmissionSchema.methods.startJudgeRoutine = function(file){
     if (file.slice(-2) !== 'py'){
         this.comment = "Only py files are allowed!"
         this.grade = 0
+        return
     }
     //check if submission is before the deadline
     if (this.submissionTime > this.deadline){
         this.comment = "Submission after deadline!"
         this.grade = 0
+        return
     }
 
     //if formal requirements are met, the submission is evaluated by the judge
