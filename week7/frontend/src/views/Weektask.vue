@@ -4,18 +4,18 @@ import WeektaskCard from '@/components/weektask-card.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
-  name: 'home',
+  name: 'Weektask',
   components: {
      WeektaskCard
   },
   computed:{
-    ...mapState(['weektasks','counter'])
+    ...mapState(['weektask'])
   },
   methods:{
-    ...mapActions(['fetchWeektasks','incrementCounter'])
+    ...mapActions(['fetchWeektask'])
   },
   created(){
-    this.fetchWeektasks()
+    this.fetchWeektask(this.$route.params.id)
   }
 }
 </script>
@@ -25,20 +25,12 @@ export default {
 <template lang="pug">
   main
     section
-      h2 Available tasks:
-      weektask-card(v-for="weektask in weektasks",:weektask="weektask")
-    section
-      button.increment-button(@click="incrementCounter") Increment 
-      div {{ counter }}
+      weektask-card(:weektask="weektask")
+    
 </template>
 
 
 <style scoped>
-  h2{
-    margin-left: 6px;
-    text-align: left;
-  }
-
   section{
     padding: 40px 0;
     text-align: center;

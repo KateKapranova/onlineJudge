@@ -18,12 +18,10 @@ router.get('/:id', async (req, res) =>{
     const weektask = await WeektaskService.find(id)
     if (!weektask) res.status(404)
     res.render('data', {data: weektask})
-    
 })
 
 router.get('/:id/json', async (req, res) =>{
-    const id = req.params.id
-    const weektask = await WeektaskService.find(id)
+    const weektask = await WeektaskService.find(req.params.id)
     if (!weektask) res.status(404)
     res.send(weektask)
 })

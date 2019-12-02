@@ -9,7 +9,7 @@ require('./mongo-connection')
 //create a web application
 const app = express()
 
-app.use(cors)
+app.use(cors())
 app.locals.moment = require('moment')
 
 app.set('view engine','pug')

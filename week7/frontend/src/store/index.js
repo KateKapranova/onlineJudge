@@ -6,17 +6,50 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    weektasks: []
+    counter: 0,
+    weektasks: [],
+    weektask: {},
+    students: [],
+    student: {}
   },
   mutations: {
-    SET_WEEKTASKS(state, data){
+    SET_COUNTER(state, newCount) {
+      state.counter = newCount
+    },
+    SET_WEEKTASKS(state, data) {
       state.weektasks = data
+    },
+    SET_WEEKTASK(state, data) {
+      state.weektask = data
+    },
+    SET_STUDENTS(state, data) {
+      state.students = data
+    },
+    SET_STUDENT(state, data) {
+      state.student = data
     }
+    
   },
   actions: {
-    async fetchWeektasks( {commit} ){
+    incrementCounter({ commit, state }) {
+      const newCount = state.counter + 1
+      commit('SET_COUNTER', newCount)
+    },
+    async fetchWeektasks({ commit }) {
       const result = await axios.get('http://localhost:3000/weektask/all/json')
-      commit("SET_WEEKTASKS", result.data)
+      commit('SET_WEEKTASKS', result.data)
+    },
+    async fetchWeektask({ commit }, id) {
+      const result = await axios.get(`http://localhost:3000/weektask/${id}/json`)
+      commit('SET_WEEKTASK', result.data)
+    },
+    async fetchStudents({ commit }) {
+      const result = await axios.get('http://localhost:3000/student/all/json')
+      commit('SET_STUDENTS', result.data)
+    },
+    async fetchStudent({ commit }, id) {
+      const result = await axios.get(`http://localhost:3000/student/${id}/json`)
+      commit('SET_STUDENT', result.data)
     }
   },
   modules: {
