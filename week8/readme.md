@@ -49,21 +49,56 @@ First, change into backend subdirectory and initialise a git repository:
 
 Then create a heroku app for backend:
 
-```sudo heroku create "app-name"```
+```sudo heroku create "app-name-backend"```
 
 Build the image of your backend app:
+
 ```sudo heroku container:push web```
 
 and release the image with the command:
+
 ```sudo heroku container:release web```
 
 From now on you can see the landing page of your backend view:
+
 ```sudo heroku open```
 
 Don't forget to configure your DB connection:
-```sudo heroku config:set VUE_APP_API_URL="https://jscc19-${USER}-backend.herokuapp.com"```
+```
+sudo heroku config:set VUE_APP_API_URL="https://jscc19-${USER}-backend.herokuapp.com"
+```
 
 This will ensure that the other URLs are accessible as well. Try:
+
 ```sudo heroku open /student/all```
 
 Since it is a fresh instance of DB, you expect to see an empty array.
+
+
+### Frontend deployment
+
+The steps are similar to the backend deployment.
+
+Change into frontend subdirectory and initialise a git repo:
+
+```git init```
+
+Create a heroku app for frontend:
+
+```sudo heroku create "app-name-frontend"```
+
+Build the image of your frontend app:
+
+```sudo heroku container:push web```
+
+Establish a connection with your backend:
+
+```heroku config:set VUE_APP_API_URL="https://app-name-backend.herokuapp.com"```
+
+And finally release the image:
+
+```sudo heroku container:release web```
+
+Enjoy the frontend part of the application with:
+
+```sudo heroku open```
