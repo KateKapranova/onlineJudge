@@ -10,7 +10,6 @@ heroku --version
 docker-compose --version
 ```
 If terminal says "permission denied", just add ```sudo``` before the command. Also some of the tools might be installed outside of /usr/bin. Add them to the PATH or update aliases in .bashrc.
-Register at heroku.com and run in terminal ```heroku login```, which will take you to heroku webpage.
 
 ## Deployment Preparation
 
@@ -23,7 +22,7 @@ sudo systemctl stop mongodb
 
 ### Refactor your code
 
-Split your code into two folders: backend and frontend. Add a Dockerfile into each of these folders. Put a docker-compose.yml into the root folder of your project. Make necessary configurations of the code to ensure the application can run not just on localhost and use a database instance. Change in backend index.js and in frontend /src/store/index.js and vue.config.js.
+Split your code into two folders: backend and frontend. Add a Dockerfile into each of these folders. Put a docker-compose.yml into the root folder of your project. Make necessary changes of the code to ensure the application can run not just on localhost and use a database instance. Apply changes in backend index.js, in frontend /src/store/index.js and vue.config.js.
 
 ### Create containers
 Start the docker deamon with
@@ -37,3 +36,34 @@ sudo docker-compose up
 Now everything is ready for deployment.
 
 ## Deployment walkthrough
+
+The application is initially deployed in heroku cloud. For this register at heroku.com and run in terminal ```heroku login```, which will take you to heroku webpage, to complete login. After successful login syncronise your docker instance with the heroku account by ```sudo heroku container:login```.
+
+Both frontend and backend are to be deployed in two distinct steps.
+
+### Backend deployment
+
+First, change into backend subdirectory and initialise a git repository:
+
+```git init```
+
+Then create a heroku app for backend:
+
+```sudo heroku create "app-name"```
+
+Build the image of your backend app:
+```sudo heroku container:push web```
+
+and release the image with the command:
+```sudo heroku container:release web```
+
+From now on you can see the landing page of your backend view:
+```sudo heroku open```
+
+Don't forget to configure your DB connection:
+```sudo heroku config:set VUE_APP_API_URL="https://jscc19-${USER}-backend.herokuapp.com"```
+
+This will ensure that the other URLs are accessible as well. Try:
+```sudo heroku open /student/all```
+
+Since it is a fresh instance of DB, you expect to see an empty array.
