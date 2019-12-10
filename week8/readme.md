@@ -19,6 +19,7 @@ In Linux use the command:
 ```
 sudo systemctl stop mongodb
 ```
+Keep in mind that your database data will be lost after it.
 
 ### Refactor your code
 
