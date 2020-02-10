@@ -23,7 +23,7 @@ Keep in mind that your database data will be lost after it.
 
 ### Refactor your code
 
-Split your code into two folders: backend and frontend. Add a Dockerfile into each of these folders. This Dockerfile will automatically build a Docker image for frontend and backend sides. Using an image you can create as many Docker containers as needed on as many nodes/machines as you want. 
+Split your code into two folders: backend and frontend. Add a Dockerfile into each of these folders. These Dockerfiles will automatically build a Docker image for frontend and backend sides. Using an image you can create as many Docker containers as needed on as many nodes/machines as you want. 
 
 Add a docker-compose.yml into the root folder of your project. This file automatically creates a Docker container based on the specifications listed. Make necessary changes of the code to ensure the application can run not just on localhost and use a database instance. Apply changes in backend index.js, in frontend /src/store/index.js and vue.config.js.
 
