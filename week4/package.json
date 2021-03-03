@@ -10,7 +10,7 @@
     "flatted": "^2.0.1",
     "generate-password": "^1.4.2",
     "nodemon": "^1.19.4",
-    "pug": "^2.0.4"
+    "pug": "^3.0.1"
   },
   "devDependencies": {},
   "scripts": {
