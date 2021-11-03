@@ -15,7 +15,7 @@
     "mongoose-autopopulate": "^0.9.1",
     "pug": "^2.0.4",
     "randomstring": "^1.1.5",
-    "validator": "^12.0.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "ava": "^2.4.0",
